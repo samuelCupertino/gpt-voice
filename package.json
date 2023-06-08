@@ -4,9 +4,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "description": "GPT Voice is an extension that allows you to use Chat GPT through voice commands and listen to the AI's response.",
-  "contributors": [
-    "louisgv"
-  ],
+  "author": "samuelcupertino.dev@gmail.com",
   "scripts": {
     "start": "next start",
     "dev": "run-p dev:*",
@@ -27,6 +25,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.1",
     "@plasmohq/prettier-plugin-sort-imports": "workspace:*",
     "@plasmohq/rps": "workspace:*",
     "@plasmohq/storage": "^1.6.1",
@@ -42,7 +41,16 @@
       "https://*/*"
     ],
     "permissions": [
-      "tabs"
-    ]
-  }
+      "tabs",
+      "storage"
+    ],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "your-id@example.com"
+      }
+    }
+  },
+  "contributors": [
+    "louisgv"
+  ]
 }
