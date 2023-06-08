@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 
@@ -5,18 +6,20 @@ export const Main = ({ name = 'Extension' }) => {
   const [data, setData] = useState('')
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        padding: 16
-      }}>
-      <h1>
-        Welcome to your <a href="https://www.plasmo.com">Plasmo</a> {name}!
-      </h1>
-      <input onChange={(e) => setData(e.target.value)} value={data} />
+    <Box bgcolor={'red'}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          padding: 16
+        }}>
+        <h1>
+          Welcome to your <a href="https://www.plasmo.com">Plasmo</a> {name}!
+        </h1>
+        <input onChange={(e) => setData(e.target.value)} value={data} />
 
-      <a href="https://docs.plasmo.com">READ THE DOCS!</a>
-    </div>
+        <a href="https://docs.plasmo.com">READ THE DOCS!</a>
+      </div>
+    </Box>
   )
 }

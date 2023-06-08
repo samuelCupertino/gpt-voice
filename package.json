@@ -17,6 +17,10 @@
     "build:next": "next build"
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.4",
     "next": "13.4.4",
     "plasmo": "workspace:*",
     "react": "18.2.0",
@@ -25,7 +29,7 @@
   "devDependencies": {
     "@plasmohq/prettier-plugin-sort-imports": "workspace:*",
     "@plasmohq/rps": "workspace:*",
-    "@plasmohq/storage": "workspace:*",
+    "@plasmohq/storage": "^1.6.1",
     "@types/chrome": "0.0.237",
     "@types/node": "20.2.5",
     "@types/react": "18.2.8",
