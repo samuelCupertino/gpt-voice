@@ -1,1 +1,1 @@
-export * from './RecognitionVoice'
+export * from './VoiceChatGPT'

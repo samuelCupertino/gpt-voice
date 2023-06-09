@@ -1,17 +1,18 @@
-import { Box, Stack } from '@mui/material'
+import { Box } from '@mui/material'
 import type React from 'react'
-import { useEffect } from 'react'
 
 import { useStorage } from '@plasmohq/storage/hook'
 
-import { RecognitionVoice } from '~components/organisms'
+import { VoiceChatGPT } from '~components/organisms'
 
 export const Content: React.FC = () => {
   const [isActive] = useStorage<boolean>('isActive')
 
+  if (!isActive) return
+
   return (
-    <Stack alignItems="center" width="100vw" mt={2}>
-      {isActive && <RecognitionVoice />}
-    </Stack>
+    <Box>
+      <VoiceChatGPT />
+    </Box>
   )
 }

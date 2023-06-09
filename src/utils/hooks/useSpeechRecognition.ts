@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 
 export const useSpeechRecognition = ({
   lang = 'pt-BR',
-  enabled = true
+  isEnabled = true
 } = {}) => {
   const [reloadRecognition, setReloadRecognition] = useState(false)
   const [transcript, setTranscript] = useState('')
   const [isFinal, setIsFinal] = useState('')
 
   useEffect(() => {
-    if (!enabled) return
+    if (!isEnabled) return
 
     if (!('webkitSpeechRecognition' in window)) {
       console.log('O navegador não suporta o reconhecimento de fala.')
@@ -48,7 +48,7 @@ export const useSpeechRecognition = ({
       recognition.onend = null
       recognition.stop()
     }
-  }, [enabled, lang, reloadRecognition, setReloadRecognition])
+  }, [isEnabled, lang, reloadRecognition, setReloadRecognition])
 
-  return { transcript, isFinal, enabled, lang }
+  return { transcript, isFinal, isEnabled, lang }
 }
