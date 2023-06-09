@@ -18,11 +18,14 @@
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
     "next": "13.4.4",
     "plasmo": "workspace:*",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-loader-spinner": "^5.3.4",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",

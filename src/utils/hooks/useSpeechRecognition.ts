@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 
 export const useSpeechRecognition = ({
   lang = 'pt-BR',
-  isActive = true
+  enabled = true
 } = {}) => {
+  const [reloadRecognition, setReloadRecognition] = useState(false)
   const [transcript, setTranscript] = useState('')
+  const [isFinal, setIsFinal] = useState('')
 
   useEffect(() => {
-    if (!isActive) return
+    if (!enabled) return
 
     if (!('webkitSpeechRecognition' in window)) {
       console.log('O navegador não suporta o reconhecimento de fala.')
@@ -16,24 +18,37 @@ export const useSpeechRecognition = ({
 
     const recognition = new (window.webkitSpeechRecognition as any)()
     recognition.lang = lang
+    recognition.continuous = true
+    recognition.interimResults = true
 
     recognition.onresult = ({ results }) => {
-      setTranscript(results[0][0].transcript)
+      const transcripts = [...results].map((result) => result[0].transcript)
+      const newTranscript = transcripts.reduce((acc, cur) => acc + cur, '')
+      const { isFinal } = results[0]
+
+      if (isFinal) setReloadRecognition(true)
+
+      setIsFinal(isFinal)
+      setTranscript(newTranscript)
     }
 
-    recognition.onend = recognition.start
+    recognition.onend = () => {
+      recognition.start()
+    }
 
     recognition.onerror = (event) => {
       console.error('Erro na transcrição de áudio:', event.error)
     }
 
     recognition.start()
+    setReloadRecognition(false)
 
     return () => {
+      setTranscript('')
       recognition.onend = null
       recognition.stop()
     }
-  }, [isActive, lang])
+  }, [enabled, lang, reloadRecognition, setReloadRecognition])
 
-  return { transcript, isActive, lang }
+  return { transcript, isFinal, enabled, lang }
 }
