@@ -1,8 +1,8 @@
 import { Box, type BoxProps } from '@mui/material'
 import type React from 'react'
 import { useEffect } from 'react'
-import { ThreeCircles } from 'react-loader-spinner'
 
+import { VoiceIndicator } from '~components/atoms'
 import { useSpeechRecognition } from '~utils/hooks'
 
 interface IVoiceRecognitionProps extends BoxProps {
@@ -40,7 +40,7 @@ export const VoiceRecognition: React.FC<IVoiceRecognitionProps> = ({
 
   return (
     <Box {...props}>
-      <ThreeCircles height={80} width={80} color="#75a99b" visible={true} />
+      <VoiceIndicator variant={transcript.length ? 'listening' : 'standard'} />
     </Box>
   )
 }

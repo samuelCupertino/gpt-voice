@@ -8,11 +8,5 @@ import { VoiceChatGPT } from '~components/organisms'
 export const Content: React.FC = () => {
   const [isActive] = useStorage<boolean>('isActive')
 
-  if (!isActive) return
-
-  return (
-    <Box>
-      <VoiceChatGPT />
-    </Box>
-  )
+  return <Box>{isActive && <VoiceChatGPT />}</Box>
 }
