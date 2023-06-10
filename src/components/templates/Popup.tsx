@@ -1,11 +1,16 @@
-import LinkIcon from '@mui/icons-material/Link'
 import { Box, FormControlLabel, Stack, Switch } from '@mui/material'
 import type React from 'react'
 
 import { useStorage } from '@plasmohq/storage/hook'
 
 export const Popup: React.FC = () => {
-  const [isActive, setIsActive] = useStorage<boolean>('isActive')
+  const [currentTab] = useStorage<string>('currentTab')
+  const [isActive, setIsActive] = useStorage<boolean>(`isActive`)
+  const isInChatGPT = currentTab?.includes('https://chat.openai.com/')
+
+  if (!isInChatGPT) {
+    return <Box width={230}>Acesse o site do ChatGPT para ativar!</Box>
+  }
 
   return (
     <Stack gap={2} width={230}>

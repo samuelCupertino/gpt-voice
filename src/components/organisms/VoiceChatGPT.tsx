@@ -15,15 +15,15 @@ export const VoiceChatGPT: React.FC<BoxProps> = (props) => {
 
   const handleSpeakAnswer = (prompt) => {
     let retry = 0
-    const time = setInterval(() => {
-      if (retry === 20) return clearInterval(time)
+    const intervalId = setInterval(() => {
+      if (retry === 30) return clearInterval(intervalId)
 
       const lastAnswerText = chatGPT.getLastAnswer()
       const isLoadingAnswer = chatGPT.getIsLoadingAnswer()
 
       if (!isLoadingAnswer && lastAnswerText !== prompt) {
         setSynthesizeText(lastAnswerText)
-        clearInterval(time)
+        clearInterval(intervalId)
       }
 
       retry++

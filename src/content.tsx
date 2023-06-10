@@ -18,14 +18,12 @@ export const getStyle = () => styleElement
 
 export const getShadowHostId: PlasmoGetShadowHostId = () => 'gpt-voice-shadow'
 
-const IndexContent: React.FC = () => {
-  return (
-    <CacheProvider value={styleCache}>
-      <ThemeProvider theme={theme}>
-        <Content />
-      </ThemeProvider>
-    </CacheProvider>
-  )
-}
+const IndexContent: React.FC = () => (
+  <CacheProvider value={styleCache}>
+    <ThemeProvider theme={theme}>
+      <Content />
+    </ThemeProvider>
+  </CacheProvider>
+)
 
 export default IndexContent

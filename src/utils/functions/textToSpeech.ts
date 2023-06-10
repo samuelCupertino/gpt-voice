@@ -1,7 +1,7 @@
 export const textToSpeech = (
   text = 'Mande um texto para eu falar',
   {
-    voiceName = 'Luciana',
+    voiceName = 'Google português do Brasil',
     speed = 1,
     onStart = () => {},
     onEnd = () => {}
@@ -13,7 +13,9 @@ export const textToSpeech = (
   }
 
   const voices = window.speechSynthesis.getVoices()
-  const selectedVoice = voices.find((voice) => voice.name === voiceName)
+  const selectedVoice =
+    voices.find((voice) => voice.name === voiceName) ||
+    voices.find((voice) => voice.lang === 'pt-BR')[0]
 
   if (!selectedVoice) {
     console.log('A voz selecionada não está disponível.')

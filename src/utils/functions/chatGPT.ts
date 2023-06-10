@@ -9,6 +9,7 @@ export const chatGPT = {
       textAreaEl.dispatchEvent(new Event('input', { bubbles: true }))
     }
   },
+
   send: () => {
     const sendButtonEl = document.querySelector(
       '#prompt-textarea~button'
@@ -16,6 +17,7 @@ export const chatGPT = {
 
     if (sendButtonEl) sendButtonEl.click()
   },
+
   getLastAnswer: () => {
     const lastAnswerEl = document
       .querySelector(
@@ -30,6 +32,7 @@ export const chatGPT = {
 
     return /\w/.test(lastAnswerText) ? lastAnswerText : ''
   },
+
   getIsLoadingAnswer: () => {
     const loadingEl = document
       .getElementById('prompt-textarea')

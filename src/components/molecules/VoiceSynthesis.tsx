@@ -7,8 +7,8 @@ import { textToSpeech } from '~utils/functions'
 
 interface IVoiceSynthesisProps extends BoxProps {
   text: string
-  onStart: () => void
-  onEnd: () => void
+  onStart?: () => void
+  onEnd?: () => void
 }
 
 export const VoiceSynthesis: React.FC<IVoiceSynthesisProps> = ({
@@ -33,8 +33,6 @@ export const VoiceSynthesis: React.FC<IVoiceSynthesisProps> = ({
   }, [text])
 
   return (
-    <Box {...props} onClick={() => textToSpeech(text, { onStart, onEnd })}>
-      {isTalking && <VoiceIndicator variant="talking" />}
-    </Box>
+    <Box {...props}>{isTalking && <VoiceIndicator variant="talking" />}</Box>
   )
 }
