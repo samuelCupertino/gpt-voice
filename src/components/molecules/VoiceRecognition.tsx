@@ -40,7 +40,9 @@ export const VoiceRecognition: React.FC<IVoiceRecognitionProps> = ({
 
   return (
     <Box {...props}>
-      <VoiceIndicator variant={transcript.length ? 'listening' : 'standard'} />
+      <VoiceIndicator
+        variant={transcript.includes(trigger) ? 'listening' : 'standard'}
+      />
     </Box>
   )
 }

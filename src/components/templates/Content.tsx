@@ -4,32 +4,38 @@ import { useEffect } from 'react'
 
 import { useStorage } from '@plasmohq/storage/hook'
 
+import type { ISelectOption } from '~components/molecules'
 import { VoiceChatGPT } from '~components/organisms'
-import { GPT_ORIGIN } from '~utils/constants'
 
 export const Content: React.FC = () => {
-  const [isActive, setIsActive] = useStorage<boolean>('isActive')
-  const [currentTab, setCurrentTab] = useStorage<string>('currentTab')
-  const isInChatGPT = currentTab?.includes(GPT_ORIGIN)
+  const [isActive] = useStorage('form.isActive', false)
+  const [, setLangOptions] = useStorage<ISelectOption[]>('form.langOptions', [])
+  const [langSelected] = useStorage('form.langSelected', 'pt-BR')
+  const [, setVoiceOptions] = useStorage<ISelectOption[]>(
+    'form.voiceOptions',
+    []
+  )
+
+  const handleInitVoiceOptions = () => {
+    const voices = window.speechSynthesis.getVoices()
+
+    const langs = [...new Set(voices.map((voice) => voice.lang))]
+    const newLangOptions = langs
+      .map((lang) => ({ value: lang, label: lang }))
+      .sort((a, b) => (a.label < b.label ? -1 : 1))
+    setLangOptions(newLangOptions)
+
+    const newVoicesOptions = voices
+      .filter((voice) => voice.lang === langSelected)
+      .map(({ name, lang }) => ({ value: name, label: name, lang }))
+    setVoiceOptions(newVoicesOptions)
+  }
 
   useEffect(() => {
-    const handleUpdateTab = () => {
-      if (!window.location.href.includes(GPT_ORIGIN)) {
-        setIsActive(false)
-      }
-      setCurrentTab(window.location.href)
-    }
-
-    handleUpdateTab()
-    window.addEventListener('focus', handleUpdateTab)
-    return () => window.removeEventListener('focus', handleUpdateTab)
+    window.speechSynthesis.onvoiceschanged = handleInitVoiceOptions
   }, [])
 
-  if (!isActive || !isInChatGPT) return
+  useEffect(handleInitVoiceOptions, [langSelected])
 
-  return (
-    <Box>
-      <VoiceChatGPT />
-    </Box>
-  )
+  return <Box>{isActive && <VoiceChatGPT />}</Box>
 }

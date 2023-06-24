@@ -1,2 +1,6 @@
 export * from './VoiceRecognition'
 export * from './VoiceSynthesis'
+export * from './fields/SelectField'
+export * from './fields/SliderField'
+export * from './fields/SwitchField'
+export * from './fields/TextField'

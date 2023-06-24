@@ -1,35 +1,12 @@
-import { Box, FormControlLabel, Stack, Switch } from '@mui/material'
+import { Box } from '@mui/material'
 import type React from 'react'
 
-import { useStorage } from '@plasmohq/storage/hook'
+import { Footer, VoiceSettingsForm } from '~components/organisms'
 
-export const Popup: React.FC = () => {
-  const [currentTab] = useStorage<string>('currentTab')
-  const [isActive, setIsActive] = useStorage<boolean>(`isActive`)
-  const isInChatGPT = currentTab?.includes('https://chat.openai.com/')
+export const Popup: React.FC = () => (
+  <Box px={2} py={1} width={300}>
+    <VoiceSettingsForm />
 
-  if (!isInChatGPT) {
-    return <Box width={230}>Acesse o site do ChatGPT para ativar!</Box>
-  }
-
-  return (
-    <Stack gap={2} width={230}>
-      <Box
-        bgcolor="secondary.200"
-        color="secondary.900"
-        borderRadius={1}
-        px={2}
-        py={1}>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={isActive}
-              onChange={() => setIsActive(!isActive)}
-            />
-          }
-          label="Ativar GPT Voice"
-        />
-      </Box>
-    </Stack>
-  )
-}
+    <Footer mt={3} />
+  </Box>
+)
